@@ -23,8 +23,8 @@ b16_今日は来てくれてありがとう！また遊ぼうね.m4a
 b17_それじゃあ、またねー.m4a
 b18_ゆっくり楽しんでいってね.m4a
 """
-# 
-scenario = [
+
+scenario_orig = [
     # 来店時
     {
         "cmd": "texts",
@@ -393,6 +393,125 @@ scenario = [
     #     "cmd": "sleep",
     #     "data": 10,
     # },
+]
+
+scenario = [
+    # １時間経過
+    {
+        "cmd": "texts",
+        "data": [
+            "そろそろ、美味しいご飯と一緒に写真を撮ろうよ！撮るならイエスボタン、撮らないならノーボタンを押してね！",
+        ],
+    },
+    {
+        "cmd": "audio",
+        "data": "assets/b11.m4a",
+    },
+    {
+        "cmd": "audio",
+        "data": "assets/b6.m4a",
+    },
+    {
+        "cmd": "pause",
+        "data": "",
+    },
+    {
+        "cmd": "yes-no",
+        "data": [1, 16],
+    },
+    {
+        "cmd": "texts",
+        "data": [
+            "いいね！じゃあ、上のカメラを見て、美味しそうな顔をして！",
+        ],
+    },
+    {
+        "cmd": "audio",
+        "data": "assets/b19.m4a",
+    },
+    {
+        "cmd": "photo",
+        "data": "",
+    },
+    {
+        "cmd": "audio",
+        "data": "assets/b21.m4a",
+    },
+    {
+        "cmd": "texts",
+        "data": [
+            "はい、撮れたよ〜！",
+            "シェアする？するならイエスボタン、しないならノーボタンを押してね！",
+        ],
+    },
+    {
+        "cmd": "audio",
+        "data": "assets/b7.m4a",
+    },
+    {
+        "cmd": "pause",
+        "data": "",
+    },
+    {
+        "cmd": "yes-no",
+        "data": [1, 4],
+    },
+    {
+        "cmd": "tweet",
+        "data": "",
+    },
+    {
+        "cmd": "texts",
+        "data": [
+            "シェアしたよ、僕の一言コメントもチェックしてね",
+        ],
+    },
+    {
+        "cmd": "audio",
+        "data": "assets/b8.m4a",
+        "next": 3,
+    },
+    {
+        "cmd": "texts",
+        "data": [
+            "シェアはしないんだね、わかったよ",
+        ],
+    },
+    {
+        "cmd": "audio",
+        "data": "assets/b9.m4a",
+    },
+    {
+        "cmd": "texts",
+        "data": [
+            "それじゃあ、またねー",
+        ],
+    },
+    {
+        "cmd": "audio",
+        "data": "assets/b17.m4a",
+        "next": 3,
+    },
+
+    {
+        "cmd": "texts",
+        "data": [
+            "最後に記念撮影っていうのもアリかもね。",
+        ],
+    },
+    {
+        "cmd": "audio",
+        "data": "assets/b13.m4a",
+    },
+
+    # {
+    #     "cmd": "sleep",
+    #     "data": 5,
+    # },
+    {
+        "cmd": "pause",
+        "data": "",
+    },
 ]
 
 with open("assets/scenario.json", "wt") as f:

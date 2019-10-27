@@ -11,6 +11,7 @@ from time import sleep
 import paho.mqtt.client as mqtt
 
 from gen_scenario import scenario
+# from gen_scenario import scenario_demo as scenario
 from cam_capture import capture
 from push_line import push_text_and_image
 from tweet import tweet_text_and_image, gen_random_message
@@ -28,7 +29,7 @@ line_firends = [
 def aplay(fpath):
     if os.path.exists(fpath):
         print(f"play: {fpath}")
-        cmd = f"afplay {fpath} -r 3"
+        cmd = f"afplay {fpath} -r 1.5"
         subprocess.call(cmd.split(" "))
         print(f"fin")
     else:
@@ -62,7 +63,9 @@ def on_message(client, userdata, msg):
         if cmd == "texts":
             for t in data:
                 print(t)
+                client.publish("text", t)
         elif cmd == "pause":
+            print("pause")
             scenario_p += jump
             break
         elif cmd == "yes-no":
@@ -100,8 +103,16 @@ def main():
     client.on_message = on_message
 
     client.connect("localhost", 1883, 60)
-
     client.loop_forever()
+
+    # client2 = mqtt.Client()
+    # client2.on_connect = on_connect
+    # client2.on_disconnect = on_disconnect
+    # client2.on_publish = on_publish
+
+    # client2.connect("localhost", 1883, 60)
+
+    # client2.loop_start()
 
 if __name__ == '__main__':
     # print(json.dumps(scenario, indent=2, ensure_ascii=False))

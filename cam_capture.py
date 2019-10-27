@@ -8,12 +8,12 @@ frames = [
     "assets/frame_bakuhai.png",
 ]
 
-def capture():
-    cap = cv2.VideoCapture(0)
-    cap.set(cv2.CAP_PROP_FPS, 30)
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FPS, 30)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
+def capture():
     ret, dst = cap.read()
     cv2.imwrite("cap.jpg", dst)
 
