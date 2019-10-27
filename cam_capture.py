@@ -1,7 +1,12 @@
 from datetime import datetime
-
+import random
 import cv2
 import numpy as np
+
+frames = [
+    "assets/frame2.png",
+    "assets/frame_bakuhai.png",
+]
 
 def capture():
     cap = cv2.VideoCapture(0)
@@ -12,8 +17,11 @@ def capture():
     ret, dst = cap.read()
     cv2.imwrite("cap.jpg", dst)
 
+    # 上下に 420 pix ずつ足す
+    white = np.ones((420, 1920, 3),np.uint8)*255
+    dst = cv2. vconcat([white, dst, white])
 
-    src = cv2.imread("frame.png", -1)
+    src = cv2.imread(random.choice(frames), -1)
 
     mask = src[:,:,3]  # アルファチャンネルだけ抜き出す。
     mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)  # 3色分に増やす。
@@ -28,7 +36,10 @@ def capture():
     fname = f"{date_str}.jpg"
     cv2.imwrite("static/" + fname, dst)
 
-    return fname
+    fthumb = f"{date_str}_thumb.jpg"
+    cv2.imwrite("static/" + fthumb, cv2.resize(dst, (240, 240)))
+
+    return fname, fthumb
 
 if __name__ == "__main__":
     fpath = capture()

@@ -12,16 +12,23 @@ import paho.mqtt.client as mqtt
 
 from gen_scenario import scenario
 from cam_capture import capture
+from push_line import push_text_and_image
+from tweet import tweet_text_and_image, gen_random_message
 
 # with open("assets/scenario.json") as f:
 #     scenario = json.load(f)
 
 scenario_p = 0
 
+line_firends = [
+    "Uac9f94f806d1a634014857766178d4d5", #ogawa
+    "Uca32e9f568b4f13246c6ba1e13bdf000", #sayu
+    "U4c8302e5ec187299150434212954e1ba", #shuto
+]
 def aplay(fpath):
     if os.path.exists(fpath):
         print(f"play: {fpath}")
-        cmd = f"afplay {fpath} -r 3.0"
+        cmd = f"afplay {fpath} -r 3"
         subprocess.call(cmd.split(" "))
         print(f"fin")
     else:
@@ -42,6 +49,7 @@ def on_message(client, userdata, msg):
     print("Received message '" + str(msg.payload) + "' on topic '" + msg.topic + "' with QoS " + str(msg.qos))
 
     global scenario_p
+    scenario_p = scenario_p % len(scenario)
 
     ch = msg.payload.decode()
     if ch not in ['y', 'n']:
@@ -69,10 +77,16 @@ def on_message(client, userdata, msg):
                 sleep(1)
         elif cmd == "audio":
             aplay(data)
-        # elif cmd == "photo":
-        #     fpath = capture()
-        #     url = os.getenv("NGROK_ENDPOINT") + fpath
-        #     push_line_image(url)
+        elif cmd == "photo":
+            global fpath
+            fpath, fthumb = capture()
+            endpoint = os.getenv("NGROK_ENDPOINT")
+            url = endpoint + fpath
+            url_thumb = endpoint + fthumb
+            # print(url, url_thumb)
+            push_text_and_image(line_firends, "写真撮れたよ〜", url, url_thumb)
+        elif cmd == "tweet":
+            tweet_text_and_image(gen_random_message(), "static/" + fpath)
         else:
             print(f"unknown command: {cmd}")
         scenario_p += jump

@@ -128,8 +128,8 @@
     "data": "assets/b18.m4a"
   },
   {
-    "cmd": "sleep",
-    "data": 5
+    "cmd": "pause",
+    "data": ""
   },
   {
     "cmd": "texts",
@@ -243,8 +243,8 @@
     "data": "assets/b13.m4a"
   },
   {
-    "cmd": "sleep",
-    "data": 5
+    "cmd": "pause",
+    "data": ""
   },
   {
     "cmd": "texts",
@@ -358,7 +358,7 @@
     "data": "assets/b16.m4a"
   },
   {
-    "cmd": "sleep",
-    "data": 10
+    "cmd": "pause",
+    "data": ""
   }
 ]

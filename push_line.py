@@ -17,10 +17,13 @@ owners = [
 ]
 line_bot_api = LineBotApi(os.getenv("LINE_ACCESS_TOKEN"))
 
-def push_text_and_image(to, text, url):
+def push_text_and_image(to, text, url, thumb=None):
+    if thumb is None:
+        thumb = url
+
     msgs = []
     msgs.append(TextSendMessage(text))
-    msgs.append(ImageSendMessage(url, url))
+    msgs.append(ImageSendMessage(url, thumb))
     line_bot_api.multicast(to, msgs)
 
 if __name__ == "__main__":
