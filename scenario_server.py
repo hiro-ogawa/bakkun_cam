@@ -12,13 +12,13 @@ import paho.mqtt.client as mqtt
 
 from gen_scenario import scenario
 # from gen_scenario import scenario_demo as scenario
-from cam_capture import capture
-from push_line import push_text_and_image
+# from cam_capture import capture
+# from push_line import push_text_and_image
 from tweet import tweet_text_and_image, gen_random_message
 
-# with open("assets/scenario.json") as f:
 #     scenario = json.load(f)
 
+# シナリオのステート
 scenario_p = 0
 
 line_firends = [
@@ -26,15 +26,19 @@ line_firends = [
     "Uca32e9f568b4f13246c6ba1e13bdf000", #sayu
     "U4c8302e5ec187299150434212954e1ba", #shuto
 ]
-def aplay(fpath):
+
+# 音声の再生
+def aplay(client, fpath):
     if os.path.exists(fpath):
         print(f"play: {fpath}")
-        cmd = f"afplay {fpath} -r 1.5"
+        cmd = f"aplay {fpath} -r 1.5"
         subprocess.call(cmd.split(" "))
+        client.publish("/sub/M5Stack", fpath)
         print(f"fin")
     else:
         print(f"file does not exist: {fpath}")
 
+# コネクトしている
 def on_connect(client, userdata, flag, rc):
     print("Connected with result code " + str(rc))
     client.subscribe("key")
@@ -42,9 +46,10 @@ def on_connect(client, userdata, flag, rc):
 def on_disconnect(client, userdata, flag, rc):
     if rc != 0:
         print("Unexpected disconnection.")
-
+# 結果をパブリッシュしている
 def on_publish(client, userdata, mid):
     print("publish: {0}".format(mid))
+
 
 def on_message(client, userdata, msg):
     print("Received message '" + str(msg.payload) + "' on topic '" + msg.topic + "' with QoS " + str(msg.qos))
@@ -58,36 +63,51 @@ def on_message(client, userdata, msg):
 
     while True:
         cmd = scenario[scenario_p]["cmd"]
+        # 使うデータ
         data = scenario[scenario_p]["data"]
+        # 次に行くステート
         jump = scenario[scenario_p].get("next", 1)
+        # テキストならプリント
         if cmd == "texts":
             for t in data:
                 print(t)
                 client.publish("text", t)
+        # つぎに進むシナリオへじゃんぷする
         elif cmd == "pause":
             print("pause")
             scenario_p += jump
             break
+        # 分岐をここでチェックしている
         elif cmd == "yes-no":
             if ch == "y":
                 scenario_p += data[0]
             else:
                 scenario_p += data[1]
             continue
+        # 少しとまる
         elif cmd == "sleep":
             for i in range(data, 0, -1):
                 print(f"sleep: {i} [sec]")
                 sleep(1)
+        # 音声再生
         elif cmd == "audio":
-            aplay(data)
+            # for t in data:
+            print(t)
+            aplay(client, data)
+        # 写真撮影
         elif cmd == "photo":
+            print("start")
             global fpath
-            fpath, fthumb = capture()
-            endpoint = os.getenv("NGROK_ENDPOINT")
-            url = endpoint + fpath
-            url_thumb = endpoint + fthumb
-            # print(url, url_thumb)
-            push_text_and_image(line_firends, "写真撮れたよ〜", url, url_thumb)
+            # fpath, fthumb = capture()
+            # print("middle")
+            # endpoint = os.getenv("NGROK_ENDPOINT")
+            # url = endpoint + fpath
+            # url_thumb = endpoint + fthumb
+            # # print(url, url_thumb)
+            # print("end")
+            # push_text_and_image(line_firends, "写真撮れたよ〜", url, url_thumb)
+            pass
+        # tweetする
         elif cmd == "tweet":
             tweet_text_and_image(gen_random_message(), "static/" + fpath)
         else:
