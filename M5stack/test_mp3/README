@@ -1,0 +1,10 @@
+
+下記２つのライブラリを Arduino/librariesにクローン
+
+
+https://github.com/earlephilhower/ESP8266Audio
+https://github.com/Gianbacchio/ESP8266_Spiram
+
+microSDから再生するデータを取得するので再生したいMP3ファイルを入れたmicroSDをM5stackに挿しておく。 
+
+※再生できるのはmp3かwavファイルのみ
