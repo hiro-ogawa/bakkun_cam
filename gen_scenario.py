@@ -39,23 +39,23 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b1.mp3",
+        "data": "/assets/b1.mp3",
     },
     {
         "cmd": "audio",
-        "data": "assets/b2.mp3",
+        "data": "/assets/b2.mp3",
     },
     {
         "cmd": "audio",
-        "data": "assets/b3.mp3",
+        "data": "/assets/b3.mp3",
     },
     {
         "cmd": "audio",
-        "data": "assets/b4.mp3",
+        "data": "/assets/b4.mp3",
     },
     {
         "cmd": "audio",
-        "data": "assets/b6.mp3",
+        "data": "/assets/b6.mp3",
     },
     {
         "cmd": "pause",
@@ -73,7 +73,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b22.mp3",
+        "data": "/assets/b22.mp3",
     },
     {
         "cmd": "photo",
@@ -81,7 +81,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b21.mp3",
+        "data": "/assets/b21.mp3",
     },
     {
         "cmd": "texts",
@@ -92,7 +92,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b7.mp3",
+        "data": "/assets/b7.mp3",
     },
     {
         "cmd": "pause",
@@ -114,7 +114,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b8.mp3",
+        "data": "/assets/b8.mp3",
         "next": 5,
     },
     {
@@ -125,7 +125,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b9.mp3",
+        "data": "/assets/b9.mp3",
         "next": 3,
     },
 
@@ -137,7 +137,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b10.mp3",
+        "data": "/assets/b10.mp3",
     },
 
     {
@@ -148,7 +148,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b18.mp3",
+        "data": "/assets/b18.mp3",
     },
 
     # {
@@ -169,11 +169,11 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b11.mp3",
+        "data": "/assets/b11.mp3",
     },
     {
         "cmd": "audio",
-        "data": "assets/b6.mp3",
+        "data": "/assets/b6.mp3",
     },
     {
         "cmd": "pause",
@@ -191,7 +191,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b19.mp3",
+        "data": "/assets/b19.mp3",
     },
     {
         "cmd": "photo",
@@ -199,7 +199,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b21.mp3",
+        "data": "/assets/b21.mp3",
     },
     {
         "cmd": "texts",
@@ -210,7 +210,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b7.mp3",
+        "data": "/assets/b7.mp3",
     },
     {
         "cmd": "pause",
@@ -232,7 +232,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b8.mp3",
+        "data": "/assets/b8.mp3",
         "next": 3,
     },
     {
@@ -243,7 +243,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b9.mp3",
+        "data": "/assets/b9.mp3",
     },
     {
         "cmd": "texts",
@@ -253,7 +253,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b17.mp3",
+        "data": "/assets/b17.mp3",
         "next": 3,
     },
 
@@ -265,7 +265,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b13.mp3",
+        "data": "/assets/b13.mp3",
     },
 
     # {
@@ -286,11 +286,11 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b14.mp3",
+        "data": "/assets/b14.mp3",
     },
     {
         "cmd": "audio",
-        "data": "assets/b6.mp3",
+        "data": "/assets/b6.mp3",
     },
     {
         "cmd": "pause",
@@ -308,7 +308,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b20.mp3",
+        "data": "/assets/b20.mp3",
     },
     {
         "cmd": "photo",
@@ -316,7 +316,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b21.mp3",
+        "data": "/assets/b21.mp3",
     },
     {
         "cmd": "texts",
@@ -327,7 +327,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b7.mp3",
+        "data": "/assets/b7.mp3",
     },
     {
         "cmd": "pause",
@@ -349,7 +349,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b8.mp3",
+        "data": "/assets/b8.mp3",
         "next": 5,
     },
     {
@@ -360,7 +360,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b9.mp3",
+        "data": "/assets/b9.mp3",
         "next": 3,
     },
 
@@ -372,7 +372,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b15.mp3",
+        "data": "/assets/b15.mp3",
     },
     {
         "cmd": "texts",
@@ -382,7 +382,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b16.mp3",
+        "data": "/assets/b16.mp3",
     },
 
     {
@@ -405,11 +405,11 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b11.mp3",
+        "data": "/assets/b11.mp3",
     },
     {
         "cmd": "audio",
-        "data": "assets/b6.mp3",
+        "data": "/assets/b6.mp3",
     },
     {
         "cmd": "pause",
@@ -427,7 +427,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b19.mp3",
+        "data": "/assets/b19.mp3",
     },
     {
         "cmd": "photo",
@@ -435,7 +435,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b21.mp3",
+        "data": "/assets/b21.mp3",
     },
     {
         "cmd": "texts",
@@ -446,7 +446,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b7.mp3",
+        "data": "/assets/b7.mp3",
     },
     {
         "cmd": "pause",
@@ -468,7 +468,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b8.mp3",
+        "data": "/assets/b8.mp3",
         "next": 3,
     },
     {
@@ -479,7 +479,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b9.mp3",
+        "data": "/assets/b9.mp3",
     },
     {
         "cmd": "texts",
@@ -489,7 +489,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b17.mp3",
+        "data": "/assets/b17.mp3",
         "next": 3,
     },
 
@@ -501,7 +501,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b13.mp3",
+        "data": "/assets/b13.mp3",
     },
 
     # {

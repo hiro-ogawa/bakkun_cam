@@ -7,11 +7,11 @@
   },
   {
     "cmd": "audio",
-    "data": "assets/b11.mp3"
+    "data": "/assets/b11.mp3"
   },
   {
     "cmd": "audio",
-    "data": "assets/b6.mp3"
+    "data": "/assets/b6.mp3"
   },
   {
     "cmd": "pause",
@@ -32,7 +32,7 @@
   },
   {
     "cmd": "audio",
-    "data": "assets/b19.mp3"
+    "data": "/assets/b19.mp3"
   },
   {
     "cmd": "photo",
@@ -40,7 +40,7 @@
   },
   {
     "cmd": "audio",
-    "data": "assets/b21.mp3"
+    "data": "/assets/b21.mp3"
   },
   {
     "cmd": "texts",
@@ -51,7 +51,7 @@
   },
   {
     "cmd": "audio",
-    "data": "assets/b7.mp3"
+    "data": "/assets/b7.mp3"
   },
   {
     "cmd": "pause",
@@ -76,7 +76,7 @@
   },
   {
     "cmd": "audio",
-    "data": "assets/b8.mp3",
+    "data": "/assets/b8.mp3",
     "next": 3
   },
   {
@@ -87,7 +87,7 @@
   },
   {
     "cmd": "audio",
-    "data": "assets/b9.mp3"
+    "data": "/assets/b9.mp3"
   },
   {
     "cmd": "texts",
@@ -97,7 +97,7 @@
   },
   {
     "cmd": "audio",
-    "data": "assets/b17.mp3",
+    "data": "/assets/b17.mp3",
     "next": 3
   },
   {
@@ -108,7 +108,7 @@
   },
   {
     "cmd": "audio",
-    "data": "assets/b13.mp3"
+    "data": "/assets/b13.mp3"
   },
   {
     "cmd": "pause",

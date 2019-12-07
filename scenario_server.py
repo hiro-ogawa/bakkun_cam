@@ -29,16 +29,14 @@ line_firends = [
 
 # 音声の再生
 def aplay(client, fpath):
-    if os.path.exists(fpath):
-        print(f"play: {fpath}")
-        cmd = f"aplay {fpath} -r 1.5"
-        subprocess.call(cmd.split(" "))
-        client.publish("/sub/M5Stack", fpath)
-        print(f"fin")
-    else:
-        print(f"file does not exist: {fpath}")
+    # pcから再生
+    # print(f"play: {fpath}")
+    # cmd = f"aplay {fpath} -r 1.5"
+    # subprocess.call(cmd.split(" "))
 
-# コネクトしている
+    # M5stackにpublishする
+    client.publish("/sub/M5Stack", fpath)
+
 def on_connect(client, userdata, flag, rc):
     print("Connected with result code " + str(rc))
     client.subscribe("key")
@@ -46,7 +44,6 @@ def on_connect(client, userdata, flag, rc):
 def on_disconnect(client, userdata, flag, rc):
     if rc != 0:
         print("Unexpected disconnection.")
-# 結果をパブリッシュしている
 def on_publish(client, userdata, mid):
     print("publish: {0}".format(mid))
 
