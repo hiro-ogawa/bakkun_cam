@@ -4,21 +4,26 @@ import cv2
 import numpy as np
 
 frames = [
-    "assets/frame2.png",
-    "assets/frame_bakuhai.png",
+    # "assets/frame2.png",
+    # "assets/frame_bakuhai.png",
+    "assets/frame_festa.png",
 ]
+
+img_w = 1280
+img_h = 720
 
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FPS, 30)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, img_w)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, img_h)
 
 def capture():
     ret, dst = cap.read()
+    dst = cv2.resize(dst, (img_w, img_h))
     cv2.imwrite("cap.jpg", dst)
 
     # 上下に 420 pix ずつ足す
-    white = np.ones((420, 1920, 3),np.uint8)*255
+    white = np.ones((int((img_w - img_h) / 2), img_w, 3), np.uint8)*255
     dst = cv2. vconcat([white, dst, white])
 
     src = cv2.imread(random.choice(frames), -1)
