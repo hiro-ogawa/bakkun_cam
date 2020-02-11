@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
+autopep8 = "*"
 
 [packages]
 opencv-python = "*"
@@ -14,6 +15,8 @@ websocket-server = "*"
 websocket-client = "*"
 flask = "*"
 tweepy = "*"
+qrcode = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"
