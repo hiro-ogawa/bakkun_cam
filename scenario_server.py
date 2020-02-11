@@ -24,14 +24,16 @@ scenario_p = 0
 line_firends = [
     "Uac9f94f806d1a634014857766178d4d5", #ogawa
     # "Uca32e9f568b4f13246c6ba1e13bdf000", #sayu
-    # "U4c8302e5ec187299150434212954e1ba", #shuto
+    "U4c8302e5ec187299150434212954e1ba", #shuto
 ]
+
+block_button = False
 
 # 音声の再生
 def aplay(client, fpath):
     # M5stackにpublishする
     print(fpath)
-    client_pub.publish("/sub/M5Stack", "/assets/" + fpath)
+    client_pub.publish("/sub/M5Stack", "/" + fpath)
 
     # pcから再生
     print(f"play: {fpath}")
@@ -114,7 +116,7 @@ def on_message(client, userdata, msg):
             url_thumb = endpoint + fthumb
             # # print(url, url_thumb)
             # print("end")
-            # push_text_and_image(line_firends, "写真撮れたよ〜", url, url_thumb)
+            push_text_and_image(line_firends, "写真撮れたよ〜", url, url_thumb)
             print("LINE:")
             print(line_firends)
             print("写真撮れたよ〜", url, url_thumb)
@@ -124,7 +126,7 @@ def on_message(client, userdata, msg):
             print("TWEET:")
             print(gen_random_message())
             print("static/" + fpath)
-            # tweet_text_and_image(gen_random_message(), "static/" + fpath)
+            tweet_text_and_image(gen_random_message(), "static/" + fpath)
         else:
             print(f"unknown command: {cmd}")
         scenario_p += jump

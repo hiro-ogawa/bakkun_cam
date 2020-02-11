@@ -12,14 +12,23 @@ frames = [
 img_w = 1280
 img_h = 720
 
-cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FPS, 30)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, img_w)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, img_h)
+# cap = cv2.VideoCapture(0)
+# cap.set(cv2.CAP_PROP_FPS, 30)
+# cap.set(cv2.CAP_PROP_FRAME_WIDTH, img_w)
+# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, img_h)
 
 def capture():
+    cap = cv2.VideoCapture(2)
+    cap.set(cv2.CAP_PROP_FPS, 30)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, img_w)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, img_h)
+
     ret, dst = cap.read()
+
+    cap.release
+
     dst = cv2.resize(dst, (img_w, img_h))
+    # dst = cv2.rotate(dst, cv2.ROTATE_180)
     cv2.imwrite("cap.jpg", dst)
 
     # 上下に 420 pix ずつ足す
