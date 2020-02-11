@@ -12,8 +12,9 @@ import paho.mqtt.client as mqtt
 
 from gen_scenario import scenario
 # from gen_scenario import scenario_demo as scenario
-from cam_capture import capture
-from push_line import push_text_and_image
+# from cam_capture import capture
+from cam_m5_camera import capture_from_m5cam
+# from push_line import push_text_and_image
 from tweet import tweet_text_and_image, gen_random_message
 
 #     scenario = json.load(f)
@@ -109,7 +110,8 @@ def on_message(client, userdata, msg):
         elif cmd == "photo":
             print("start")
             global fpath
-            fpath, fthumb = capture()
+            # fpath, fthumb = capture()
+            fpath, fthumb = capture_from_m5cam()
             # print("middle")
             endpoint = os.getenv("NGROK_ENDPOINT")
             url = endpoint + fpath
