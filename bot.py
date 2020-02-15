@@ -1,5 +1,8 @@
 import os
+import json
+
 from flask import Flask, request, abort
+import paho.mqtt.client as mqtt
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -23,6 +26,22 @@ line_bot_api = LineBotApi(line_channel_access_token)
 handler = WebhookHandler(line_channel_secret)
 
 db = BakkunDB()
+
+mqtt_clients = [
+    mqtt.Client(),
+    mqtt.Client(),
+    mqtt.Client(),
+]
+mqtt_servers = [
+    "localhost",
+    "localhost",
+    "localhost",
+]
+groups = [
+    "group1",
+    "group2",
+    "test_group",
+]
 
 
 @app.route("/callback", methods=['POST'])
@@ -79,35 +98,46 @@ def handle_text_message(event):
     uid = event.source.user_id
     # キーワードチェック
     if text == "JOIN:GROUP1":
-        db.add_user_to_group(uid, "group1")
+        db.add_user_to_group(uid, groups[0])
+        mqtt_clients[0].publish("user", json.dumps({"cmd": "add", "val": uid}))
+
         reply_msgs.append(TextSendMessage(text="バックンカメラの実証実験へようこそ。グループの全員がお友達になったら開始ボタンを押してね", quick_reply=QuickReply(items=[
             QuickReplyButton(action=PostbackAction(label="開始", data="start"))
         ])))
     elif text == "JOIN-GROUP2":
-        db.add_user_to_group(uid, "group2")
+        db.add_user_to_group(uid, groups[1])
+        mqtt_clients[1].publish("user", json.dumps({"cmd": "add", "val": uid}))
+
         reply_msgs.append(TextSendMessage(text="バックンカメラの実証実験へようこそ。グループの全員がお友達になったら開始ボタンを押してね", quick_reply=QuickReply(items=[
             QuickReplyButton(action=PostbackAction(label="開始", data="start"))
         ])))
 
     elif text == "バイバイ GROUP1":
+        db.delete_group(groups[1])
+        mqtt_clients[0].publish("user", json.dumps({"cmd": "clear"}))
+
         msgs = TextSendMessage(
             text="実証実験に協力してくれてありがとう。\nグループを削除したよ。")
         send_msgs_group(uid, msgs, event.reply_token)
-        db.delete_group("group1")
     elif text == "バイバイ GROUP2":
+        db.delete_group(groups[1])
+        mqtt_clients[1].publish("user", json.dumps({"cmd": "clear"}))
+
         msgs = TextSendMessage(
             text="実証実験に協力してくれてありがとう。\nグループを削除したよ。")
         send_msgs_group(uid, msgs, event.reply_token)
-        db.delete_group("group2")
     elif text == "ばいばい":
+        db.delete_group(groups[2])
+        mqtt_clients[2].publish("user", json.dumps({"cmd": "clear"}))
+
         msgs = TextSendMessage(
             text="実証実験に協力してくれてありがとう。\nグループを削除したよ。")
         send_msgs_group(uid, msgs, event.reply_token)
-        db.delete_group("test_group")
 
     else:
         # グループDB更新
-        db.add_user_to_group(uid, "test_group")
+        db.add_user_to_group(uid, groups[2])
+        mqtt_clients[2].publish("user", json.dumps({"cmd": "add", "val": uid}))
 
         reply_msgs.append(TextSendMessage(text="バックンカメラの実証実験へようこそ。グループの全員がお友達になったら開始ボタンを押してね", quick_reply=QuickReply(items=[
             QuickReplyButton(action=PostbackAction(label="開始", data="start"))
@@ -165,6 +195,9 @@ def handle_postback_event(event):
         send_msgs_group(uid, msgs, event.reply_token)
 
     # mqtt 開始コマンド送信
+    group = db.get_group_from_uid(uid)
+    i = groups.index(group)
+    mqtt_clients[i].publish("user", json.dumps({"cmd": "start"}))
 
 
 def send_msgs_group(uid, msgs, reply_token=None):
@@ -179,6 +212,35 @@ def send_msgs_group(uid, msgs, reply_token=None):
         if members:
             line_bot_api.multicast(members, msgs)
 
+##############
+# MQTT
+##############
+
+
+def on_connect(client, userdata, flag, rc):
+    print("Connected with result code " + str(rc))
+
+
+def on_disconnect(client, userdata, flag, rc):
+    if rc != 0:
+        print("Unexpected disconnection.")
+
+
+def on_publish(client, userdata, mid):
+    print("publish: {0}".format(mid))
+
+
+def init_mqtt():
+    for i, client in enumerate(mqtt_clients):
+        client.on_connect = on_connect
+        client.on_disconnect = on_disconnect
+        client.on_publish = on_publish
+
+        client.connect(mqtt_servers[i], 1883, 60)
+
+        client.loop_start()
+
 
 if __name__ == "__main__":
+    init_mqtt()
     app.run(debug=debug)

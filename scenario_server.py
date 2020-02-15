@@ -22,10 +22,14 @@ from tweet import tweet_text_and_image, gen_random_message
 scenario_p = 0
 
 line_firends = [
-    "Uac9f94f806d1a634014857766178d4d5", #ogawa
-    "Uca32e9f568b4f13246c6ba1e13bdf000", #sayu
-    "U4c8302e5ec187299150434212954e1ba", #shuto
+    "Uac9f94f806d1a634014857766178d4d5",  # ogawa
+    "Uca32e9f568b4f13246c6ba1e13bdf000",  # sayu
+    "U4c8302e5ec187299150434212954e1ba",  # shuto
 ]
+
+usersjson = "users.json"
+
+
 def aplay(fpath):
     if os.path.exists(fpath):
         print(f"play: {fpath}")
@@ -35,24 +39,36 @@ def aplay(fpath):
     else:
         print(f"file does not exist: {fpath}")
 
+
 def on_connect(client, userdata, flag, rc):
     print("Connected with result code " + str(rc))
     client.subscribe("key")
+    client.subscribe("user")
+
 
 def on_disconnect(client, userdata, flag, rc):
     if rc != 0:
         print("Unexpected disconnection.")
 
+
 def on_publish(client, userdata, mid):
     print("publish: {0}".format(mid))
 
-def on_message(client, userdata, msg):
-    print("Received message '" + str(msg.payload) + "' on topic '" + msg.topic + "' with QoS " + str(msg.qos))
 
+def on_message(client, userdata, msg):
+    print("Received message '" + str(msg.payload.decode()) +
+          "' on topic '" + msg.topic + "' with QoS " + str(msg.qos))
+
+    if msg.topic == "key":
+        handle_scenario(client, msg.payload.decode())
+    elif msg.topic == "user":
+        handle_user(json.loads(msg.payload.decode()))
+
+
+def handle_scenario(client, ch):
     global scenario_p
     scenario_p = scenario_p % len(scenario)
 
-    ch = msg.payload.decode()
     if ch not in ['y', 'n']:
         return
 
@@ -87,13 +103,49 @@ def on_message(client, userdata, msg):
             url = endpoint + fpath
             url_thumb = endpoint + fthumb
             # print(url, url_thumb)
-            push_text_and_image(line_firends, "写真撮れたよ〜", url, url_thumb)
+            # push_text_and_image(line_firends, "写真撮れたよ〜", url, url_thumb)
+            push_text_and_image(load_users(), "写真撮れたよ〜", url, url_thumb)
         elif cmd == "tweet":
             tweet_text_and_image(gen_random_message(), "static/" + fpath)
         else:
             print(f"unknown command: {cmd}")
         scenario_p += jump
         scenario_p = scenario_p % len(scenario)
+
+
+def load_users():
+    try:
+        with open(usersjson) as f:
+            return json.load(f)
+    except:
+        print(f"failed to load {usersjson}")
+
+        return []
+
+
+def add_user(user):
+    users = load_users()
+    if user not in users:
+        users.append(user)
+    with open(usersjson, "w") as f:
+        json.dump(users, f)
+
+
+def handle_user(data):
+    cmd = data["cmd"]
+    if cmd == "add":
+        try:
+            uid = data["val"]
+        except:
+            return
+
+        add_user(uid)
+    if cmd == "clear":
+        print(f"delete {usersjson}")
+        os.remove(usersjson)
+    if cmd == "start":
+        print("start")
+
 
 def main():
     client = mqtt.Client()
@@ -105,14 +157,6 @@ def main():
     client.connect("localhost", 1883, 60)
     client.loop_forever()
 
-    # client2 = mqtt.Client()
-    # client2.on_connect = on_connect
-    # client2.on_disconnect = on_disconnect
-    # client2.on_publish = on_publish
-
-    # client2.connect("localhost", 1883, 60)
-
-    # client2.loop_start()
 
 if __name__ == '__main__':
     # print(json.dumps(scenario, indent=2, ensure_ascii=False))
