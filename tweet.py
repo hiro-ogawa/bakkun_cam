@@ -8,8 +8,8 @@ access_token_secret = os.getenv("TWITTER_ATS")
 api_key = os.getenv("TWITTER_CK")
 api_secret = os.getenv("TWITTER_CSK")
 
-auth = tweepy.OAuthHandler(api_key,api_secret)
-auth.set_access_token(access_token,access_token_secret)
+auth = tweepy.OAuthHandler(api_key, api_secret)
+auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
 
@@ -21,11 +21,14 @@ random_messages = [
     "養老乃瀧で素敵な仲間と写真が撮れたよ！＃養老乃滝 #yorohack\nバックン「養老乃瀧って、別に養ってもらっても、老人でもないんだよ。創業者が、その名前の地名に伝わる親孝行伝説からとったんだよ。これ豆だけど、誰も覚えて帰ってくれないだろうな。」",
 ]
 
-def gen_random_message():
+
+def gen_random_message() -> str:
     return random.choice(random_messages)
 
+
 def tweet_text_and_image(text, fpath):
-    api.update_with_media(filename=fpath,status=text)
+    api.update_with_media(filename=fpath, status=text)
+
 
 if __name__ == "__main__":
     tweet_text_and_image("testing", "static/test.jpg")
