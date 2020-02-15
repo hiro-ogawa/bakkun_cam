@@ -38,15 +38,21 @@ class BakkunDB(object):
         except IndexError:
             self.groupdb.insert({"name": group, "members": [uid]})
 
-    def delete_group(self, group: str):
-        try:
-            self.groupdb.remove(self.que.name == group)
-        except IndexError:
-            pass
+    def get_group_from_uid(self, uid: str):
+        for group in self.groupdb.all():
+            if uid in group["members"]:
+                return group["name"]
+        return None
 
-    def get_users(self, group: str):
+    def get_group_members(self, group: str):
         try:
             res = self.groupdb.search(self.que.name == group)[0]
             return res.get("members", [])
         except IndexError:
             return []
+
+    def delete_group(self, group: str):
+        try:
+            self.groupdb.remove(self.que.name == group)
+        except IndexError:
+            pass

@@ -88,19 +88,23 @@ def handle_text_message(event):
         reply_msgs.append(TextSendMessage(text="バックンカメラの実証実験へようこそ。グループの全員がお友達になったら開始ボタンを押してね", quick_reply=QuickReply(items=[
             QuickReplyButton(action=PostbackAction(label="開始", data="start"))
         ])))
-    elif text == "バイバイ GROUP1":
-        db.delete_group("group1")
-        reply_msgs.append(TextSendMessage(
-            text="実証実験に協力してくれてありがとう。\nグループを削除したよ。"))
-    elif text == "バイバイ GROUP2":
-        db.delete_group("group2")
-        reply_msgs.append(TextSendMessage(
-            text="実証実験に協力してくれてありがとう。\nグループを削除したよ。"))
 
+    elif text == "バイバイ GROUP1":
+        msgs = TextSendMessage(
+            text="実証実験に協力してくれてありがとう。\nグループを削除したよ。")
+        send_msgs_group(uid, msgs, event.reply_token)
+        db.delete_group("group1")
+    elif text == "バイバイ GROUP2":
+        msgs = TextSendMessage(
+            text="実証実験に協力してくれてありがとう。\nグループを削除したよ。")
+        send_msgs_group(uid, msgs, event.reply_token)
+        db.delete_group("group2")
     elif text == "ばいばい":
+        msgs = TextSendMessage(
+            text="実証実験に協力してくれてありがとう。\nグループを削除したよ。")
+        send_msgs_group(uid, msgs, event.reply_token)
         db.delete_group("test_group")
-        reply_msgs.append(TextSendMessage(
-            text="実証実験に協力してくれてありがとう。\nグループを削除したよ。"))
+
     else:
         # グループDB更新
         db.add_user_to_group(uid, "test_group")
@@ -109,9 +113,8 @@ def handle_text_message(event):
             QuickReplyButton(action=PostbackAction(label="開始", data="start"))
         ])))
 
-        # mqttで開始コマンド送信
-
-    line_bot_api.reply_message(event.reply_token, reply_msgs)
+    if len(reply_msgs):
+        line_bot_api.reply_message(event.reply_token, reply_msgs)
 
 
 @handler.add(FollowEvent)
@@ -154,12 +157,27 @@ def handle_unfollow_event(event):
 def handle_postback_event(event):
     print(event)
 
-    reply_msgs = []
-    if event.postback.data == "start":
-        reply_msgs.append(TextSendMessage(text="バックンカメラの実証実験を開始します\n楽しんでいってね"))
+    uid = event.source.user_id
 
-    if len(reply_msgs):
-        line_bot_api.reply_message(event.reply_token, reply_msgs)
+    if event.postback.data == "start":
+        msgs = TextSendMessage(
+            text="バックンカメラの実証実験を開始します\n楽しんでいってね")
+        send_msgs_group(uid, msgs, event.reply_token)
+
+    # mqtt 開始コマンド送信
+
+
+def send_msgs_group(uid, msgs, reply_token=None):
+    group = db.get_group_from_uid(uid)
+    if group:
+        members = db.get_group_members(group)
+
+        if reply_token:
+            members.remove(uid)
+            line_bot_api.reply_message(reply_token, msgs)
+
+        if members:
+            line_bot_api.multicast(members, msgs)
 
 
 if __name__ == "__main__":
