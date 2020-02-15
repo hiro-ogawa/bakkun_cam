@@ -17,6 +17,8 @@ db = BakkunDB()
 
 owners = [
     "Uac9f94f806d1a634014857766178d4d5",
+    # "Uda900fc1da8c3da351d9b9c884aa52e5",
+    # "U4c8302e5ec187299150434212954e1ba",
 ]
 line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
 

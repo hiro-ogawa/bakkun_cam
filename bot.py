@@ -80,12 +80,22 @@ def handle_text_message(event):
     # キーワードチェック
     if text == "JOIN:GROUP1":
         db.add_user_to_group(uid, "group1")
+        reply_msgs.append(TextSendMessage(text="バックンカメラの実証実験へようこそ。グループの全員がお友達になったら開始ボタンを押してね", quick_reply=QuickReply(items=[
+            QuickReplyButton(action=PostbackAction(label="開始", data="start"))
+        ])))
     elif text == "JOIN-GROUP2":
         db.add_user_to_group(uid, "group2")
+        reply_msgs.append(TextSendMessage(text="バックンカメラの実証実験へようこそ。グループの全員がお友達になったら開始ボタンを押してね", quick_reply=QuickReply(items=[
+            QuickReplyButton(action=PostbackAction(label="開始", data="start"))
+        ])))
     elif text == "バイバイ GROUP1":
         db.delete_group("group1")
+        reply_msgs.append(TextSendMessage(
+            text="実証実験に協力してくれてありがとう。\nグループを削除したよ。"))
     elif text == "バイバイ GROUP2":
         db.delete_group("group2")
+        reply_msgs.append(TextSendMessage(
+            text="実証実験に協力してくれてありがとう。\nグループを削除したよ。"))
 
     elif text == "ばいばい":
         db.delete_group("test_group")

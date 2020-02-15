@@ -4,7 +4,7 @@ from tinydb import TinyDB, Query
 class BakkunDB(object):
     def __init__(self):
         # データベースの作成
-        self.db = TinyDB('bakkundb.json', indent=2)
+        self.db = TinyDB('bakkundb.json', indent=2, ensure_ascii=False)
         self.que = Query()
 
         self.friendsdb = self.db.table("friends")
@@ -28,12 +28,13 @@ class BakkunDB(object):
     def add_user_to_group(self, uid: str, group: str):
         try:
             res = self.groupdb.search(self.que.name == group)[0]
+            members = res.get("members", [])
 
-            if uid in res.members:
+            if uid in members:
                 return
             else:
                 self.groupdb.update(
-                    res.get("members", []) + [uid], self.que.name == group)
+                    {"members": members + [uid]}, self.que.name == group)
         except IndexError:
             self.groupdb.insert({"name": group, "members": [uid]})
 

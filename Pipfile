@@ -17,6 +17,7 @@ flask = "*"
 tweepy = "*"
 pillow = "*"
 tinydb = "*"
+qrcode = "*"
 
 [requires]
 python_version = "3.7"
