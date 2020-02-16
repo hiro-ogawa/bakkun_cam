@@ -14,8 +14,11 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
 
-hashtags = ["養老乃瀧池袋南口店", "バックンカメラ", "EpsonPrint", "no1"]
-hashtags = [f" #{tag}" for tag in hashtags]
+base_tags = ["養老乃瀧池袋南口店", "バックンカメラ", "EpsonPrint"]
+table_no = os.getenv('TABLE_NO', 0)
+tags = base_tags + [f"no{table_no}"]
+
+hashtags = [f" #{tag}" for tag in tags]
 hashtag_text = "".join(hashtags)
 
 random_messages = [

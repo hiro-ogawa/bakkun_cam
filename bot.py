@@ -36,6 +36,7 @@ mqtt_servers = [
     "localhost",
     "localhost",
     "localhost",
+    # "192.168.42.114",
 ]
 groups = [
     "group1",

@@ -22,9 +22,10 @@ from tweet import tweet_text_and_image, gen_random_message
 scenario_p = 0
 
 line_firends = [
-    "Uac9f94f806d1a634014857766178d4d5",  # ogawa
     "Uca32e9f568b4f13246c6ba1e13bdf000",  # sayu
+    "Uda900fc1da8c3da351d9b9c884aa52e5",  # kyan
     "U4c8302e5ec187299150434212954e1ba",  # shuto
+    "Uac9f94f806d1a634014857766178d4d5",  # ogawa
 ]
 
 usersjson = "users.json"
@@ -104,7 +105,8 @@ def handle_scenario(client, ch):
             url_thumb = endpoint + fthumb
             # print(url, url_thumb)
             # push_text_and_image(line_firends, "写真撮れたよ〜", url, url_thumb)
-            push_text_and_image(load_users(), "写真撮れたよ〜", url, url_thumb)
+            push_text_and_image(load_users(),
+                                "写真撮れたよ〜\nこの画像をダウンロードしてTweetボタンでツイートすると印刷されるよ", url, url_thumb)
         elif cmd == "tweet":
             tweet_text_and_image(gen_random_message(), "static/" + fpath)
         else:

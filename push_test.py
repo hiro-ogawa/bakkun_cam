@@ -10,6 +10,8 @@ from image_handling import add_frame, gen_thumbnail
 from push_line import push_text_and_image
 from tweet import tweet_text_and_image, gen_random_message
 
+from scenario_server import load_users
+
 from db_tiny import BakkunDB
 db = BakkunDB()
 
@@ -66,7 +68,8 @@ if __name__ == "__main__":
     thumb = gen_thumbnail(image, (240, 240))
     thumb.save(ftpath)
 
-    uids = db.get_users("test_group")
+    uids = load_users()
+    # uids = db.get_users("test_group")
     if len(uids):
         furl = os.getenv("NGROK_ENDPOINT") + "/" + fpath
         fturl = os.getenv("NGROK_ENDPOINT") + "/" + ftpath
