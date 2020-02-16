@@ -17,8 +17,8 @@ from linebot.models import (
 )
 
 from tweet import gen_tweet_url
-from db_tiny import BakkunDB
-db = BakkunDB()
+# from db_tiny import BakkunDB
+# db = BakkunDB()
 
 owners = [
     # "Uca32e9f568b4f13246c6ba1e13bdf000",  # sayu
@@ -67,7 +67,9 @@ if __name__ == "__main__":
     # push_text_and_image(owners, "testing", os.getenv(
     #     "NGROK_ENDPOINT") + "test.jpg")
 
-    uids = db.get_group_members("test_group")
-    if len(uids):
-        push_text_and_image(uids, "testing", os.getenv(
-            "NGROK_ENDPOINT") + "/static/test.jpg")
+    # uids = db.get_group_members("test_group")
+    # if len(uids):
+    #     push_text_and_image(uids, "testing", os.getenv(
+    #         "NGROK_ENDPOINT") + "/static/test.jpg")
+
+    pass
