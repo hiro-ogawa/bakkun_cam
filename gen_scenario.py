@@ -4,24 +4,24 @@ https://docs.google.com/document/d/1JIYEfG2ZTI6NfGATaiU8_lb_NEhzdRq4IDlNlbcsc2I/
 import json
 
 """
-b1_いらっしゃいませ、ようこそ養老乃瀧へ.m4a
-b2_僕の名前はバックン、よろしくね.m4a
-b3_飲み物はそろったかな.m4a
-b4_ねえねえ、記念写真を撮らない？.m4a
-b5_おっけー！じゃあ上のカメラを見てね。3.2.1.はい、撮れたよー.m4a
-b6_撮るならイエスボタン、撮らないならノーボタンを押してね.m4a
-b7_シェアする？するならイエスボタン、しないならノーボタンを押してね.m4a
-b8_シェアしたよ、僕の一言コメントもチェックしてね.m4a
-b9_シェアはしないんだね、わかったよ.m4a
-b10_えー？じゃあ、後で撮ろうね.m4a
-b11_そろそろ美味しいご飯と一緒に写真を撮ろうよ.m4a
-b12_いいね、じゃあ上のカメラを見ておいしそうな顔をして！3.2.1.はい、撮れたよ〜.m4a
-b13_まあ、最後に記念撮影っていうのもアリかもね〜.m4a
-b14_さあ、みんなで最後に写真を撮ろうよ.m4a
-b15_チッ(最後に写真を撮らなかった).m4a
-b16_今日は来てくれてありがとう！また遊ぼうね.m4a
-b17_それじゃあ、またねー.m4a
-b18_ゆっくり楽しんでいってね.m4a
+b1_いらっしゃいませ、ようこそ養老乃瀧へ.wav
+b2_僕の名前はバックン、よろしくね.wav
+b3_飲み物はそろったかな.wav
+b4_ねえねえ、記念写真を撮らない？.wav
+b5_おっけー！じゃあ上のカメラを見てね。3.2.1.はい、撮れたよー.wav
+b6_撮るならイエスボタン、撮らないならノーボタンを押してね.wav
+b7_シェアする？するならイエスボタン、しないならノーボタンを押してね.wav
+b8_シェアしたよ、僕の一言コメントもチェックしてね.wav
+b9_シェアはしないんだね、わかったよ.wav
+b10_えー？じゃあ、後で撮ろうね.wav
+b11_そろそろ美味しいご飯と一緒に写真を撮ろうよ.wav
+b12_いいね、じゃあ上のカメラを見ておいしそうな顔をして！3.2.1.はい、撮れたよ〜.wav
+b13_まあ、最後に記念撮影っていうのもアリかもね〜.wav
+b14_さあ、みんなで最後に写真を撮ろうよ.wav
+b15_チッ(最後に写真を撮らなかった).wav
+b16_今日は来てくれてありがとう！また遊ぼうね.wav
+b17_それじゃあ、またねー.wav
+b18_ゆっくり楽しんでいってね.wav
 """
 
 scenario_orig = [
@@ -39,23 +39,23 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b1.m4a",
+        "data": "assets/wav/b1.wav",
     },
     {
         "cmd": "audio",
-        "data": "assets/b2.m4a",
+        "data": "assets/wav/b2.wav",
     },
     {
         "cmd": "audio",
-        "data": "assets/b3.m4a",
+        "data": "assets/wav/b3.wav",
     },
     {
         "cmd": "audio",
-        "data": "assets/b4.m4a",
+        "data": "assets/wav/b4.wav",
     },
     {
         "cmd": "audio",
-        "data": "assets/b6.m4a",
+        "data": "assets/wav/b6.wav",
     },
     {
         "cmd": "pause",
@@ -73,7 +73,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b22.m4a",
+        "data": "assets/wav/b22.wav",
     },
     {
         "cmd": "photo",
@@ -81,7 +81,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b21.m4a",
+        "data": "assets/wav/b21.wav",
     },
     {
         "cmd": "texts",
@@ -92,7 +92,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b7.m4a",
+        "data": "assets/wav/b7.wav",
     },
     {
         "cmd": "pause",
@@ -114,7 +114,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b8.m4a",
+        "data": "assets/wav/b8.wav",
         "next": 5,
     },
     {
@@ -125,7 +125,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b9.m4a",
+        "data": "assets/wav/b9.wav",
         "next": 3,
     },
 
@@ -137,7 +137,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b10.m4a",
+        "data": "assets/wav/b10.wav",
     },
 
     {
@@ -148,7 +148,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b18.m4a",
+        "data": "assets/wav/b18.wav",
     },
 
     # {
@@ -169,11 +169,11 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b11.m4a",
+        "data": "assets/wav/b11.wav",
     },
     {
         "cmd": "audio",
-        "data": "assets/b6.m4a",
+        "data": "assets/wav/b6.wav",
     },
     {
         "cmd": "pause",
@@ -191,7 +191,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b19.m4a",
+        "data": "assets/wav/b19.wav",
     },
     {
         "cmd": "photo",
@@ -199,7 +199,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b21.m4a",
+        "data": "assets/wav/b21.wav",
     },
     {
         "cmd": "texts",
@@ -210,7 +210,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b7.m4a",
+        "data": "assets/wav/b7.wav",
     },
     {
         "cmd": "pause",
@@ -232,7 +232,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b8.m4a",
+        "data": "assets/wav/b8.wav",
         "next": 3,
     },
     {
@@ -243,7 +243,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b9.m4a",
+        "data": "assets/wav/b9.wav",
     },
     {
         "cmd": "texts",
@@ -253,7 +253,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b17.m4a",
+        "data": "assets/wav/b17.wav",
         "next": 3,
     },
 
@@ -265,7 +265,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b13.m4a",
+        "data": "assets/wav/b13.wav",
     },
 
     # {
@@ -286,11 +286,11 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b14.m4a",
+        "data": "assets/wav/b14.wav",
     },
     {
         "cmd": "audio",
-        "data": "assets/b6.m4a",
+        "data": "assets/wav/b6.wav",
     },
     {
         "cmd": "pause",
@@ -308,7 +308,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b20.m4a",
+        "data": "assets/wav/b20.wav",
     },
     {
         "cmd": "photo",
@@ -316,7 +316,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b21.m4a",
+        "data": "assets/wav/b21.wav",
     },
     {
         "cmd": "texts",
@@ -327,7 +327,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b7.m4a",
+        "data": "assets/wav/b7.wav",
     },
     {
         "cmd": "pause",
@@ -349,7 +349,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b8.m4a",
+        "data": "assets/wav/b8.wav",
         "next": 5,
     },
     {
@@ -360,7 +360,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b9.m4a",
+        "data": "assets/wav/b9.wav",
         "next": 3,
     },
 
@@ -372,7 +372,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b15.m4a",
+        "data": "assets/wav/b15.wav",
     },
     {
         "cmd": "texts",
@@ -382,7 +382,7 @@ scenario_orig = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b16.m4a",
+        "data": "assets/wav/b16.wav",
     },
 
     {
@@ -405,11 +405,11 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b11.m4a",
+        "data": "assets/wav/b11.wav",
     },
     {
         "cmd": "audio",
-        "data": "assets/b6.m4a",
+        "data": "assets/wav/b6.wav",
     },
     {
         "cmd": "pause",
@@ -427,7 +427,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b19.m4a",
+        "data": "assets/wav/b19.wav",
     },
     {
         "cmd": "photo",
@@ -435,7 +435,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b21.m4a",
+        "data": "assets/wav/b21.wav",
     },
     {
         "cmd": "texts",
@@ -446,7 +446,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b7.m4a",
+        "data": "assets/wav/b7.wav",
     },
     {
         "cmd": "pause",
@@ -468,7 +468,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b8.m4a",
+        "data": "assets/wav/b8.wav",
         "next": 3,
     },
     {
@@ -479,7 +479,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b9.m4a",
+        "data": "assets/wav/b9.wav",
     },
     {
         "cmd": "texts",
@@ -489,7 +489,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b17.m4a",
+        "data": "assets/wav/b17.wav",
         "next": 3,
     },
 
@@ -501,7 +501,7 @@ scenario = [
     },
     {
         "cmd": "audio",
-        "data": "assets/b13.m4a",
+        "data": "assets/wav/b13.wav",
     },
 
     # {
@@ -514,5 +514,5 @@ scenario = [
     },
 ]
 
-with open("assets/scenario.json", "wt") as f:
+with open("assets/wav/scenario.json", "wt") as f:
     json.dump(scenario, f, indent=2, ensure_ascii=False)

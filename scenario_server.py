@@ -7,6 +7,8 @@ import os
 import json
 import subprocess
 from time import sleep
+from datetime import datetime
+import random
 
 import paho.mqtt.client as mqtt
 
@@ -16,6 +18,7 @@ from gen_scenario import scenario
 from m5camera import M5Camera
 from push_line import push_text_and_image
 from tweet import tweet_text_and_image, gen_random_message
+from image_handling import add_frame, gen_thumbnail
 
 # with open("assets/scenario.json") as f:
 #     scenario = json.load(f)
@@ -154,6 +157,9 @@ def handle_scenario(client, ch):
             url_thumb = endpoint + "/" + fthumb
             # print(url, url_thumb)
             # push_text_and_image(line_firends, "写真撮れたよ〜", url, url_thumb)
+            print(load_users())
+            print(url)
+            print(url_thumb)
             push_text_and_image(load_users(),
                                 "写真撮れたよ〜\nこの画像をダウンロードしてTweetボタンでツイートすると印刷されるよ", url, url_thumb)
         elif cmd == "tweet":
