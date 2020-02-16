@@ -12,9 +12,6 @@ from tweet import tweet_text_and_image, gen_random_message
 
 from scenario_server import load_users
 
-from db_tiny import BakkunDB
-db = BakkunDB()
-
 
 def cap(fname="raw.jpg"):
     cam = M5Camera("192.168.179.3")
@@ -43,8 +40,8 @@ def webcam_cap(fname="raw.jpg"):
 
 
 if __name__ == "__main__":
-    # cap()
-    webcam_cap()
+    cap()
+    # webcam_cap()
 
     frames = [
         "assets/frame2.png",
