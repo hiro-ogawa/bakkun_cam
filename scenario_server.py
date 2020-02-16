@@ -12,7 +12,8 @@ import paho.mqtt.client as mqtt
 
 from gen_scenario import scenario
 # from gen_scenario import scenario_demo as scenario
-from cam_capture import capture
+# from cam_capture import capture
+from m5camera import M5Camera
 from push_line import push_text_and_image
 from tweet import tweet_text_and_image, gen_random_message
 
@@ -32,11 +33,14 @@ usersjson = "users.json"
 
 
 def aplay(fpath):
+    # macで再生するときはgen_senario.pyで音声ファイル形式をwavでなくm4aにする
     if os.path.exists(fpath):
         print(f"play: {fpath}")
-        cmd = f"afplay {fpath} -r 1.5"
+        # linuxはこっち
+        cmd = f"aplay {fpath}"
+        # macのときはこっち
+        # cmd = f"afplay {fpath} -r 1.5"
         subprocess.call(cmd.split(" "))
-        print(f"fin")
     else:
         print(f"file does not exist: {fpath}")
 
@@ -64,6 +68,51 @@ def on_message(client, userdata, msg):
         handle_scenario(client, msg.payload.decode())
     elif msg.topic == "user":
         handle_user(json.loads(msg.payload.decode()))
+
+
+def cap(fname="raw.jpg"):
+    cam = M5Camera("192.168.179.3")
+
+    cam.set_ae_level(2)
+    cam.set_vflip(1)
+    cam.set_framesize(10)
+    sleep(0.5)
+
+    res = cam.capture()
+    print(res.status_code)
+
+    if res.status_code == 200:
+        with open(fname, "wb") as f:
+            f.write(res.content)
+
+
+def capture():
+    cap()
+    # webcam_cap()
+
+    frames = [
+        "assets/frame2.png",
+        "assets/frame_bakuhai.png",
+    ]
+
+    # input_fname = "raw_test_image.jpg"
+    input_fname = "raw.jpg"
+
+    # frame_fname = "assets/frame2.png"
+    # frame_fname = "assets/frame_bakuhai.png"
+    frame_fname = random.choice(frames)
+
+    date_str = datetime.now().strftime('%y%m%d_%H%M%S')
+    fpath = f"static/{date_str}.jpg"
+    ftpath = f"static/{date_str}_thumb.jpg"
+
+    image = add_frame(input_fname, frame_fname)
+    print(image.size)
+    image.save(fpath)
+    thumb = gen_thumbnail(image, (240, 240))
+    thumb.save(ftpath)
+
+    return fpath, ftpath
 
 
 def handle_scenario(client, ch):
@@ -101,14 +150,14 @@ def handle_scenario(client, ch):
             global fpath
             fpath, fthumb = capture()
             endpoint = os.getenv("NGROK_ENDPOINT")
-            url = endpoint + fpath
-            url_thumb = endpoint + fthumb
+            url = endpoint + "/" + fpath
+            url_thumb = endpoint + "/" + fthumb
             # print(url, url_thumb)
             # push_text_and_image(line_firends, "写真撮れたよ〜", url, url_thumb)
             push_text_and_image(load_users(),
                                 "写真撮れたよ〜\nこの画像をダウンロードしてTweetボタンでツイートすると印刷されるよ", url, url_thumb)
         elif cmd == "tweet":
-            tweet_text_and_image(gen_random_message(), "static/" + fpath)
+            tweet_text_and_image(gen_random_message(), fpath)
         else:
             print(f"unknown command: {cmd}")
         scenario_p += jump
