@@ -33,7 +33,7 @@ mqtt_clients = [
     mqtt.Client(),
 ]
 mqtt_servers = [
-    "localhost",
+    "10.46.31.31",
     "localhost",
     "localhost",
     # "192.168.42.114",

@@ -2,7 +2,7 @@ import qrcode
 import urllib.parse
 
 line_id = "@325ccasn"
-text = "JOIN:TEST_GROUP"
+text = "JOIN:GROUP1"
 enc_text = urllib.parse.quote(text)
 url = f"line://oaMessage/{line_id}/?{enc_text}"
 print(url)

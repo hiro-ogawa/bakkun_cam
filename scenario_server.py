@@ -74,7 +74,7 @@ def on_message(client, userdata, msg):
 
 
 def cap(fname="raw.jpg"):
-    cam = M5Camera("192.168.179.3")
+    cam = M5Camera("10.46.31.61")
 
     cam.set_ae_level(2)
     cam.set_vflip(1)
